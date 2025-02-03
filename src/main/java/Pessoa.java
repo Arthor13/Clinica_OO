@@ -11,7 +11,8 @@ public class Pessoa {
     public Pessoa(String nome, String cpf, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento; 
+        this.dataNascimento = dataNascimento;
+    }
 
     // Getter e Setter para nome
     public String getNome() {
@@ -39,4 +40,6 @@ public class Pessoa {
     public void setData(String dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+
 }
