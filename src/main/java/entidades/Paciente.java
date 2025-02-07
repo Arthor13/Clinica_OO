@@ -1,4 +1,4 @@
-package model;
+package entidades;
 
 class Paciente extends Pessoa {
 

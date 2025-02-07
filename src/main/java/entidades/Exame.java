@@ -1,4 +1,4 @@
-package model;
+package entidades;
 
 public class Exame {
     private int id;

@@ -1,3 +1,5 @@
+package entidades;
+
 import java.util.List;
 
 public class Consulta {

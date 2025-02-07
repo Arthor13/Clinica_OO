@@ -1,4 +1,4 @@
-package model;
+package servicos;
 
 public enum PagamentoStatus {
     PENDENTE,

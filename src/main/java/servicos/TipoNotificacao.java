@@ -1,4 +1,4 @@
-package model;
+package servicos;
 
 public enum TipoNotificacao {
     CONSULTA_AGENDADA,
