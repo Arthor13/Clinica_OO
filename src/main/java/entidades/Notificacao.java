@@ -8,9 +8,9 @@ public class Notificacao {
     private String mensagem;
     private LocalDateTime dataNotificacao;
     private String destinatario;
-    private TipoNotificacao tipo;
+    private servicos.TipoNotificacao tipo;
 
-    public Notificacao(String mensagem, String destinatario, TipoNotificacao tipo) {
+    public Notificacao(String mensagem, String destinatario, servicos.TipoNotificacao tipo) {
         this.mensagem = mensagem;
         this.dataNotificacao = LocalDateTime.now();
         this.destinatario = destinatario;
@@ -41,11 +41,11 @@ public class Notificacao {
         this.destinatario = destinatario;
     }
 
-    public TipoNotificacao getTipo() {
+    public servicos.TipoNotificacao getTipo() {
         return tipo;
     }
 
-    public void setTipo(TipoNotificacao tipo) {
+    public void setTipo(servicos.TipoNotificacao tipo) {
         this.tipo = tipo;
     }
 

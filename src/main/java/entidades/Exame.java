@@ -1,30 +1,28 @@
 package entidades;
 
+import java.time.LocalDate;
+
 public class Exame {
     private int id;
     private static int contadorID = 1;
     private String tipo;
-    private String dataPreescricao;
-    private String dataRealizacao;
+    private LocalDate dataPrescricao;
+    private LocalDate dataRealizacao;
     private String resultado;
     private Double custo;
 
 
-    public Exame(int id, String tipo, String dataPreescricao, String dataRealizacao, String resultado, Double custo) {
+    public Exame(String tipo,LocalDate dataPrescricao,Double custo) {
         this.id = contadorID++;
         this.tipo = tipo;
-        this.dataPreescricao = dataPreescricao;
-        this.dataRealizacao = dataRealizacao;
-        this.resultado = resultado;
+        this.dataPrescricao = dataPrescricao;
+        this.dataRealizacao = null;
+        this.resultado = null;
         this.custo = custo;
     }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getTipo() {
@@ -35,19 +33,19 @@ public class Exame {
         this.tipo = tipo;
     }
 
-    public String getDataPreescricao() {
-        return dataPreescricao;
+    public LocalDate getDataPrescricao() {
+        return dataPrescricao;
     }
 
-    public void setDataPreescricao(String dataPreescricao) {
-        this.dataPreescricao = dataPreescricao;
+    public void setDataPrescricao(LocalDate dataPrescricao) {
+        this.dataPrescricao = dataPrescricao;
     }
 
-    public String getDataRealizacao() {
+    public LocalDate getDataRealizacao() {
         return dataRealizacao;
     }
 
-    public void setDataRealizacao(String dataRealizacao) {
+    public void setDataRealizacao(LocalDate dataRealizacao) {
         this.dataRealizacao = dataRealizacao;
     }
 
@@ -67,7 +65,7 @@ public class Exame {
         this.custo = custo;
     }
 
-    public void realizarExame(String dataRealizacao, String resultado){
+    public void realizarExame(LocalDate dataRealizacao, String resultado){
     this.dataRealizacao = dataRealizacao;
     this.resultado = resultado;
     }

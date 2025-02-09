@@ -1,6 +1,8 @@
 package entidades;
 
-class Medico extends Pessoa {
+import java.time.LocalDate;
+
+public class Medico extends Pessoa {
 
     private int crm;
     private String especialidade;

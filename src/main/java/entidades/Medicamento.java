@@ -1,6 +1,6 @@
 package entidades;
 
-class Medicamento {
+public class Medicamento {
 
     private int id;
     private String nome;

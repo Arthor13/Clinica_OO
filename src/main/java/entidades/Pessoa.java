@@ -1,14 +1,16 @@
 package entidades;
 
 
+import java.time.LocalDate;
+
 public class Pessoa {
 
     private String nome;
     private String cpf;
-    private String dataNascimento;
+    private LocalDate dataNascimento;
 
     // Construtor
-    public Pessoa(String nome, String cpf, String dataNascimento) {
+    public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -33,13 +35,11 @@ public class Pessoa {
     }
 
     // Getter e Setter para Data de Nascimento
-    public String getData() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setData(String dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-
 }

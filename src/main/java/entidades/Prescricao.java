@@ -1,60 +1,55 @@
 package entidades;
 
-public class Prescricao
-{
-    private int id;
-    private List<Medicamento> medicamento = new ArrayList<>();
-    private List<Exame> exame = new ArrayList<>();
-    private Consulta consultaAssociada;
-    private String dataValidade;
+import model.entidades.Consulta;
 
-    public Prescricao(int id, List<Medicamento> medicamento, List<Exame> exame, Consulta consultaAssociada, String dataValidade)
-    {
+import java.util.List;
+import java.util.ArrayList;
+import java.time.LocalDate;
+
+public class Prescricao {
+    private int id;
+    private List<Medicamento> medicamento;
+    private List<Exame> exame;
+    private Consulta consultaAssociada;
+    private LocalDate dataValidade;
+
+    public Prescricao(int id, List<Medicamento> medicamento, List<Exame> exame, Consulta consultaAssociada, LocalDate dataValidade) {
         this.id = id;
-        this.medicamento = medicamento;
-        this.exame = exame;
+        this.medicamento = (medicamento != null) ? medicamento : new ArrayList<>();
+        this.exame = (exame != null) ? exame : new ArrayList<>();
         this.consultaAssociada = consultaAssociada;
         this.dataValidade = dataValidade;
     }
 
-    setMedicamento(List<Medicamento> medicamento)
-    {
+    public void setMedicamento(List<Medicamento> medicamento) {
         this.medicamento = medicamento;
     }
 
-    getMedicamento()
-    {
+    public List<Medicamento> getMedicamento() {
         return medicamento;
     }
 
-    setExame(List<Exame> exame)
-    {
+    public void setExame(List<Exame> exame) {
         this.exame = exame;
     }
 
-    getExame()
-    {
+    public List<Exame> getExame() {
         return exame;
     }
 
-    setConsultaAssociada(Consulta consultaAssociada)
-    {
+    public void setConsultaAssociada(Consulta consultaAssociada) {
         this.consultaAssociada = consultaAssociada;
     }
 
-    getConsultaAssociada()
-    {
+    public Consulta getConsultaAssociada() {
         return consultaAssociada;
     }
 
-    setDataValidade(String dataValidade)
-    {
+    public void setDataValidade(LocalDate dataValidade) {
         this.dataValidade = dataValidade;
     }
 
-    getDataValidade()
-    {
+    public LocalDate getDataValidade() {
         return dataValidade;
     }
-
 }
