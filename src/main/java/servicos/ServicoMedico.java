@@ -2,6 +2,7 @@ package servicos;
 
 import entidades.Medico;
 import excecoes.MedicoJaExisteException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +36,13 @@ public class ServicoMedico {
         return null;
     }
 
-    public void atualizarPaciente(int crm, Medico medico) {
+    public void atualizarPaciente(String nome, LocalDate dataNascimento,int crm, String especialidade, Medico medico) {
         Medico medicoAtualizado = buscarMedicoPorCrm(crm);
 
-        medicoAtualizado.setNome(medico.getNome());
-        medicoAtualizado.setDataNascimento(medico.getDataNascimento());
-        medicoAtualizado.setCrm(medico.getCrm());
-        medicoAtualizado.setEspecialidade(medico.getEspecialidade());
+        medicoAtualizado.setNome(nome);
+        medicoAtualizado.setDataNascimento(dataNascimento);
+        medicoAtualizado.setCrm(crm);
+        medicoAtualizado.setEspecialidade(especialidade);
         System.out.println("Médico atualizado com sucesso!");
     }
 
