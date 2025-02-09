@@ -1,4 +1,4 @@
-package model.entidades;
+package entidades;
 
 public enum StatusConsulta {
     AGENDADA,

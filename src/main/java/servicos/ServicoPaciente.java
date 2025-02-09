@@ -3,10 +3,8 @@ package servicos;
 import entidades.Paciente;
 import excecoes.PacienteJaExisteException;
 import excecoes.PacienteNaoEncontradoException;
-
-import java.util.List;
 import java.util.ArrayList;
-import java.time.LocalDate;
+import java.util.List;
 
 public class ServicoPaciente {
     private List<Paciente> pacientes;
