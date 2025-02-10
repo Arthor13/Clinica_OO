@@ -1,4 +1,4 @@
-package entidades;
+package model.entidades;
 
 
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 import entidades.Medicamento;
 import entidades.Exame;
-import entidades.Consulta;
+import model.entidades.Consulta;
 
 public class Prescricao {
     private int id;

@@ -5,9 +5,11 @@ import entidades.Paciente;
 import java.time.LocalDate;
 import servicos.ServicoPaciente;
 import excecoes.PacienteJaExisteException;
-import excecoes.PacienteNaoExisteException;
+
+
 public class MenuPaciente {
     static ServicoPaciente servicoPaciente = new ServicoPaciente();
+
     public static void menuPaciente() {
         int opcao = 0;
         do {
@@ -40,38 +42,42 @@ public class MenuPaciente {
         String cpf = JOptionPane.showInputDialog("CPF");
         String telefone = JOptionPane.showInputDialog("Telefone");
         String email = JOptionPane.showInputDialog("Email");
-        LocalDate dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+        String dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
         Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
         try {
             servicoPaciente.cadastrarPaciente(paciente);
         } catch (PacienteJaExisteException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-}
+    }
 
-    public static void listarPacientes(){
+    public static void listarPacientes() {
         servicoPaciente.listarPacientes();
     }
 
-    public static void atualizarPaciente(){
+    public static void atualizarPaciente() {
         String cpf = JOptionPane.showInputDialog("CPF");
         String nome = JOptionPane.showInputDialog("Nome");
         String telefone = JOptionPane.showInputDialog("Telefone");
         String email = JOptionPane.showInputDialog("Email");
-        LocalDate dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+        String dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+
         Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
         try {
             servicoPaciente.atualizarPaciente(cpf, paciente);
-        } catch (PacienteNaoExisteException e) {
+            JOptionPane.showInputDialog(null,"Paciente atualizado com sucesso!");
+        } catch (excecoes.PacienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
 
-    public static void excluirPaciente(){
+    public static void excluirPaciente() {
         String cpf = JOptionPane.showInputDialog("CPF");
         try {
             servicoPaciente.removerPaciente(cpf);
-        } catch (PacienteNaoExisteException e) {
+            JOptionPane.showMessageDialog(null, "Paciente removido com sucesso!");
+        } catch (excecoes.PacienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+}

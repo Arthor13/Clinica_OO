@@ -1,6 +1,8 @@
 package entidades;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Exame {
     private int id;
@@ -12,14 +14,23 @@ public class Exame {
     private Double custo;
 
 
-    public Exame(String tipo,LocalDate dataPrescricao,Double custo) {
+    public Exame(String tipo,String dataPrescricao,Double custo) {
         this.id = contadorID++;
         this.tipo = tipo;
-        this.dataPrescricao = dataPrescricao;
+        this.dataPrescricao = converterData(dataPrescricao);
         this.dataRealizacao = null;
         this.resultado = null;
         this.custo = custo;
     }
+    private static LocalDate converterData(String dataStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return LocalDate.parse(dataStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Formato de data inválido! Use dd/MM/yyyy.");
+        }
+    }
+
 
     public int getId() {
         return id;

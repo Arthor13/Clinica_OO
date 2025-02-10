@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import entidades.Consulta;
-import entidades.Medico;
-import excecoes.ConsultaJaExisteException;
-import excecoes.ConsultaNaoEncontradaException;
+import model.entidades.Consulta;
+import model.entidades.Medico;
+import model.excecoes.ConsultaJaExisteException;
+import model.excecoes.ConsultaNaoEncontradaException;
 
 public class ServicoConsulta {
     private List<Consulta> consultas;

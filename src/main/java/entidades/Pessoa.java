@@ -10,10 +10,18 @@ public class Pessoa {
     private LocalDate dataNascimento;
 
     // Construtor
-    public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+    public Pessoa(String nome, String cpf, String dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
-        this.dataNascimento = dataNascimento;
+        this.dataNascimento = converterData(dataNascimento);
+    }
+    private static LocalDate converterData(String dataStr) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        try {
+            return LocalDate.parse(dataStr, formatter);
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("Formato de data inválido! Use dd/MM/yyyy.");
+        }
     }
 
     // Getter e Setter para nome

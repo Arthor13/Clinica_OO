@@ -1,4 +1,4 @@
-package entidades;
+package model.entidades;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,11 +22,11 @@ public class Consulta {
   private List<Medicamento> medicamentosPrescritos;
   private double valor;
 
-  public Consulta(String dataConsulta, String horarioInicio, int duracao, String status,
-                  entidades.Paciente paciente, entidades.Medico medico, List<entidades.Exame> examesPrescritos,
-                  List<entidades.Medicamento> medicamentosPrescritos, double valor) {
-    this.dataConsulta = LocalDate.parse(dataConsulta, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-    this.horarioInicio = LocalTime.parse(horarioInicio, DateTimeFormatter.ofPattern("HH:mm"));
+  public Consulta(LocalDate dataConsulta, LocalTime horarioInicio, int duracao, String status,
+                  Paciente paciente, Medico medico, List<Exame> examesPrescritos,
+                  List<Medicamento> medicamentosPrescritos, double valor) {
+    this.dataConsulta = dataConsulta;
+    this.horarioInicio = horarioInicio;
     this.duracao = duracao;
     this.status = StatusConsulta.valueOf(status.toUpperCase());
     this.paciente = paciente;
@@ -68,35 +68,35 @@ public class Consulta {
     this.status = status;
   }
 
-  public entidades.Paciente getPaciente() {
+  public Paciente getPaciente() {
     return paciente;
   }
 
-  public void setPaciente(entidades.Paciente paciente) {
+  public void setPaciente(Paciente paciente) {
     this.paciente = paciente;
   }
 
-  public entidades.Medico getMedico() {
+  public model.entidades.Medico getMedico() {
     return medico;
   }
 
-  public void setMedico(entidades.Medico medico) {
+  public void setMedico(Medico medico) {
     this.medico = medico;
   }
 
-  public List<entidades.Exame> getExamesPrescritos() {
+  public List<Exame> getExamesPrescritos() {
     return examesPrescritos;
   }
 
-  public void setExamesPrescritos(List<entidades.Exame> examesPrescritos) {
+  public void setExamesPrescritos(List<Exame> examesPrescritos) {
     this.examesPrescritos = examesPrescritos;
   }
 
-  public List<entidades.Medicamento> getMedicamentosPrescritos() {
+  public List<Medicamento> getMedicamentosPrescritos() {
     return medicamentosPrescritos;
   }
 
-  public void setMedicamentosPrescritos(List<entidades.Medicamento> medicamentosPrescritos) {
+  public void setMedicamentosPrescritos(List<Medicamento> medicamentosPrescritos) {
     this.medicamentosPrescritos = medicamentosPrescritos;
   }
 

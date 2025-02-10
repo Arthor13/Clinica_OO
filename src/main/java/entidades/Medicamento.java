@@ -6,9 +6,10 @@ public class Medicamento {
     private String nome;
     private String tipo;
     private String dosagem;
+    private static int contadorID = 1;
 
-    public Medicamento(int id, String nome, String tipo, String dosagem) {
-        this.id = id;
+    public Medicamento(String nome, String tipo, String dosagem) {
+        this.id = contadorID;
         this.nome = nome;
         this.tipo = tipo;
         this.dosagem = dosagem;
