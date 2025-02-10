@@ -9,7 +9,7 @@ import java.lang.classfile.Signature;
 import java.lang.classfile.instruction.ThrowInstruction;
 public class MenuMedico {
     static ServicoMedico servicoMedico = new ServicoMedico();
-    public static void menuPaciente() {
+    public static void menuMedico() {
        
         int opcao = 0;
         do {
