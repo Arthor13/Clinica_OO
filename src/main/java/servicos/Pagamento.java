@@ -1,6 +1,7 @@
 package servicos;
 
 import java.time.LocalDate;
+import servicos.PagamentoStatus;
 
 
 public class Pagamento {
