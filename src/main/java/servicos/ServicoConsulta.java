@@ -1,4 +1,4 @@
-package model.servicos;
+package servicos;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
