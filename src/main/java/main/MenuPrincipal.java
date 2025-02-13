@@ -3,7 +3,6 @@ package main;
 import javax.swing.JOptionPane;
 import  menu.MenuMedico;
 import  menu.MenuPaciente;
-import  menu.MenuConsulta;
 
 public class MenuPrincipal {
     public static void main(String[] args) {
@@ -27,7 +26,7 @@ public class MenuPrincipal {
             }
         } while (opcao != 4);
     }
-}
-{
+
+
     
 }

@@ -46,4 +46,8 @@ public class Medicamento {
     public void setDosagem(String dosagem) {
         this.dosagem = dosagem;
     }
+
+    public String toString() {
+        return "ID: " + this.id + " - Nome: " + this.nome + " - Tipo: " + this.tipo + " - Dosagem: " + this.dosagem;
+    }
 }

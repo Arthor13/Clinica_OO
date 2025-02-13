@@ -1,18 +1,23 @@
 package menu;
-import javax.swing.JOptionPane;
+
 import entidades.Consulta;
-import entidades.Paciente;
-import servicos.ServicoConsulta;
 import excecoes.ConsultaJaExisteException;
 import excecoes.ConsultaNaoEncontradaException;
-import entidades.Paciente;
-import entidades.Medico;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+import servicos.ServicoConsulta;
+import servicos.ServicoExame;
 import servicos.ServicoMedico;
 import servicos.ServicoPaciente;
+
 public class MenuConsulta {
     static ServicoPaciente servicoPaciente = new ServicoPaciente();
     static ServicoMedico servicoMedico = new ServicoMedico();
     static ServicoConsulta servicoConsulta = new ServicoConsulta();
+    static ServicoExame servicoExame = new ServicoExame();
 
     public static void menuConsulta() {
         int opcao = 0;
@@ -43,35 +48,27 @@ public class MenuConsulta {
             }
         } while (opcao != 5);
     }
-    
 
     public static void agendarConsulta() {
-        String dataConsulta = JOptionPane.showInputDialog("Data da Consulta");
-
-        String horarioInicio = JOptionPane.showInputDialog("Horário de Início");
-
-        String stringDuracao = JOptionPane.showInputDialog("Duração");
+        String dataConsulta = JOptionPane.showInputDialog("Data da Consulta (dd/MM/yyyy)");
+        String horarioInicio = JOptionPane.showInputDialog("Horário de Início (HH:mm)");
+        String stringDuracao = JOptionPane.showInputDialog("Duração (minutos)");
         int duracao = Integer.parseInt(stringDuracao);
-
         String status = JOptionPane.showInputDialog("Status");
         String cpfpaciente = JOptionPane.showInputDialog("CPF do Paciente");
-
         String stringCrm = JOptionPane.showInputDialog("CRM do Médico");
         int crmMedico = Integer.parseInt(stringCrm);
-
-        String examesPrescritos = JOptionPane.showInputDialog("Exames Prescritos");
-
-        String medicamentosPrescritos = JOptionPane.showInputDialog("Medicamentos Prescritos");
 
         String stringValor = JOptionPane.showInputDialog("Valor");
         double valor = Double.parseDouble(stringValor);
 
-        Consulta consulta = new Consulta(dataConsulta, horarioInicio, duracao, status, servicoPaciente.buscarPacientePorCpf(cpfpaciente), servicoMedico.buscarMedicoPorCrm(crmMedico), examesPrescritos, medicamentosPrescritos, valor);
+        Consulta consulta = new Consulta(dataConsulta, horarioInicio, duracao, status, servicoPaciente.buscarPacientePorCpf(cpfpaciente), servicoMedico.buscarMedicoPorCrm(crmMedico), null, null, valor);
 
         try {
             servicoConsulta.agendarConsulta(consulta);
         } catch (ConsultaJaExisteException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
         }
     }
 
@@ -79,37 +76,73 @@ public class MenuConsulta {
         servicoConsulta.listarConsultas();
     }
 
-    
-    /*public static void atualizarConsulta(){
-        String dataAntiga = JOptionPane.showInputDialog("Data da Consulta Antiga");
-        String horarioAntigo = JOptionPane.showInputDialog("Horário de Início Antigo");
-        String crmMedico = JOptionPane.showInputDialog("CRM do Médico");
-        String novaDataConsulta = JOptionPane.showInputDialog("Nova Data da Consulta");
-        String novoHorarioInicio = JOptionPane.showInputDialog("Novo Horário de Início");
-        String novaDuracao = JOptionPane.showInputDialog("Nova Duração");
+    public static void atualizarConsulta() {
+        String dataAntigaStr = JOptionPane.showInputDialog("Data da Consulta Antiga (dd/MM/yyyy)");
+        LocalDate dataAntiga = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataAntiga = LocalDate.parse(dataAntigaStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Consulta inválida");
+            return;
+        }
+
+        String horarioAntigoStr = JOptionPane.showInputDialog("Horário de Início Antigo (HH:mm)");
+        LocalTime horarioAntigo = null;
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            horarioAntigo = LocalTime.parse(horarioAntigoStr, timeFormatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Horário de Início inválido");
+            return;
+        }
+
+        int crmMedico = Integer.parseInt(JOptionPane.showInputDialog("CRM do Médico"));
+        String novaDataConsulta = JOptionPane.showInputDialog("Nova Data da Consulta (dd/MM/yyyy)");
+        String novoHorarioInicio = JOptionPane.showInputDialog("Novo Horário de Início (HH:mm)");
+        int novaDuracao = Integer.parseInt(JOptionPane.showInputDialog("Nova Duração (minutos)"));
         String novoStatus = JOptionPane.showInputDialog("Novo Status");
         String cpfPaciente = JOptionPane.showInputDialog("CPF do Paciente");
-        String examesPrescritos = JOptionPane.showInputDialog("Exames Prescritos");
-        String medicamentosPrescritos = JOptionPane.showInputDialog("Medicamentos Prescritos");
+
         String novoValor = JOptionPane.showInputDialog("Novo Valor");
-        Consulta novaConsulta = new Consulta(novaDataConsulta, novoHorarioInicio, novaDuracao, novoStatus, cpfPaciente, crmMedico, examesPrescritos, medicamentosPrescritos, novoValor);
+        double valor = Double.parseDouble(novoValor);
+
+        Consulta novaConsulta = new Consulta(novaDataConsulta, novoHorarioInicio, novaDuracao, novoStatus, servicoPaciente.buscarPacientePorCpf(cpfPaciente), servicoMedico.buscarMedicoPorCrm(crmMedico), null, null, valor);
+
         try {
-            servicoConsulta.atualizarConsulta(dataAntiga, horarioAntigo, crmMedico, novaConsulta);
+            servicoConsulta.atualizarConsulta(dataAntiga, horarioAntigo, servicoMedico.buscarMedicoPorCrm(crmMedico), novaConsulta);
+        } catch (ConsultaNaoEncontradaException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
+    }
+
+    public static void cancelarConsulta() {
+        String dataStr = JOptionPane.showInputDialog("Data da Consulta Antiga (dd/MM/yyyy)");
+        LocalDate data = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            data = LocalDate.parse(dataStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Consulta inválida");
+            return;
+        }
+        String horarioStr = JOptionPane.showInputDialog("Horário de Início Antigo (HH:mm)");
+        LocalTime horario = null;
+        try {
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+            horario = LocalTime.parse(horarioStr, timeFormatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Horário de Início inválido");
+            return;
+        }
+        String stringCrm = JOptionPane.showInputDialog("CRM do Médico");
+        int crmMedico = Integer.parseInt(stringCrm);
+
+        try {
+            servicoConsulta.removerConsulta(data, horario, servicoMedico.buscarMedicoPorCrm(crmMedico));
         } catch (ConsultaNaoEncontradaException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-    */
-        public static void excluirConsulta(){
-            String data = JOptionPane.showInputDialog("Data da Consulta");
-            String horario = JOptionPane.showInputDialog("Horário de Início");
-            
-            String stringCrm = JOptionPane.showInputDialog("CRM do Médico");
-            int crmMedico = Integer.parseInt(stringCrm);
-            
-            try {
-                servicoConsulta.removerConsulta(data, horario, servicoMedico.buscarMedicoPorCrm(crmMedico));
-            } catch (ConsultaNaoEncontradaException e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-            }
     }
 }

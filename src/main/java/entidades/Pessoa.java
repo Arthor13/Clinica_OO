@@ -1,6 +1,5 @@
 package entidades;
 
-
 import java.time.LocalDate;
 
 public class Pessoa {
@@ -8,12 +7,14 @@ public class Pessoa {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
+    private HistoricoMedico historicoMedico;
 
     // Construtor
     public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.historicoMedico = new HistoricoMedico();
     }
 
     // Getter e Setter para nome
@@ -41,5 +42,10 @@ public class Pessoa {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    // Getter para histórico médico
+    public HistoricoMedico getHistoricoMedico() {
+        return historicoMedico;
     }
 }

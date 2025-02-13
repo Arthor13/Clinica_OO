@@ -3,7 +3,6 @@ package entidades;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Consulta {
@@ -18,16 +17,16 @@ public class Consulta {
   private double valor;
 
   public Consulta(String dataConsulta, String horarioInicio, int duracao, String status,
-                  entidades.Paciente paciente, entidades.Medico medico, List<entidades.Exame> examesPrescritos,
-                  List<entidades.Medicamento> medicamentosPrescritos, double valor) {
+                  Paciente paciente, Medico medico, List<Exame> examesPrescritos,
+                  List<Medicamento> medicamentosPrescritos, double valor) {
     this.dataConsulta = LocalDate.parse(dataConsulta, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     this.horarioInicio = LocalTime.parse(horarioInicio, DateTimeFormatter.ofPattern("HH:mm"));
     this.duracao = duracao;
     this.status = StatusConsulta.valueOf(status.toUpperCase());
     this.paciente = paciente;
     this.medico = medico;
-    this.examesPrescritos = (examesPrescritos != null) ? examesPrescritos : new ArrayList<>();
-    this.medicamentosPrescritos = (medicamentosPrescritos != null) ? medicamentosPrescritos : new ArrayList<>();
+    this.examesPrescritos = examesPrescritos; // Permitir nulo
+    this.medicamentosPrescritos = medicamentosPrescritos; // Permitir nulo
     this.valor = valor;
   }
 
@@ -63,35 +62,35 @@ public class Consulta {
     this.status = status;
   }
 
-  public entidades.Paciente getPaciente() {
+  public Paciente getPaciente() {
     return paciente;
   }
 
-  public void setPaciente(entidades.Paciente paciente) {
+  public void setPaciente(Paciente paciente) {
     this.paciente = paciente;
   }
 
-  public entidades.Medico getMedico() {
+  public Medico getMedico() {
     return medico;
   }
 
-  public void setMedico(entidades.Medico medico) {
+  public void setMedico(Medico medico) {
     this.medico = medico;
   }
 
-  public List<entidades.Exame> getExamesPrescritos() {
+  public List<Exame> getExamesPrescritos() {
     return examesPrescritos;
   }
 
-  public void setExamesPrescritos(List<entidades.Exame> examesPrescritos) {
+  public void setExamesPrescritos(List<Exame> examesPrescritos) {
     this.examesPrescritos = examesPrescritos;
   }
 
-  public List<entidades.Medicamento> getMedicamentosPrescritos() {
+  public List<Medicamento> getMedicamentosPrescritos() {
     return medicamentosPrescritos;
   }
 
-  public void setMedicamentosPrescritos(List<entidades.Medicamento> medicamentosPrescritos) {
+  public void setMedicamentosPrescritos(List<Medicamento> medicamentosPrescritos) {
     this.medicamentosPrescritos = medicamentosPrescritos;
   }
 
@@ -101,5 +100,19 @@ public class Consulta {
 
   public void setValor(double valor) {
     this.valor = valor;
+  }
+
+  public String toString() {
+    return "Consulta{" +
+            "dataConsulta=" + dataConsulta +
+            ", horarioInicio=" + horarioInicio +
+            ", duracao=" + duracao +
+            ", status=" + status +
+            ", paciente=" + paciente +
+            ", medico=" + medico +
+            ", examesPrescritos=" + examesPrescritos +
+            ", medicamentosPrescritos=" + medicamentosPrescritos +
+            ", valor=" + valor +
+            '}';
   }
 }

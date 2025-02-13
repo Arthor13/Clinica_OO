@@ -1,15 +1,15 @@
 package servicos;
 
+import entidades.Consulta;
+import entidades.Medico;
+import excecoes.ConsultaJaExisteException;
+import excecoes.ConsultaNaoEncontradaException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import entidades.Consulta;
-import entidades.Medico;
-import excecoes.ConsultaJaExisteException;
-import excecoes.ConsultaNaoEncontradaException;
+import javax.swing.JOptionPane;
 
 public class ServicoConsulta {
     private List<Consulta> consultas;
@@ -24,12 +24,12 @@ public class ServicoConsulta {
             throw new ConsultaJaExisteException("Já existe uma consulta marcada para esse horário com este médico.");
         }
         consultas.add(consulta);
-        System.out.println("Consulta agendada com sucesso!");
+        JOptionPane.showMessageDialog(null, "Consulta agendada com sucesso!");
     }
 
     // Listar todas as consultas
-    public List<Consulta> listarConsultas() {
-        return consultas;
+    public void listarConsultas() {
+        JOptionPane.showMessageDialog(null, "Consultas: " + consultas);
     }
 
     // Listar consultas por paciente
@@ -58,7 +58,7 @@ public class ServicoConsulta {
         consultaExistente.setMedicamentosPrescritos(novaConsulta.getMedicamentosPrescritos());
         consultaExistente.setValor(novaConsulta.getValor());
 
-        System.out.println("Consulta atualizada com sucesso!");
+        JOptionPane.showMessageDialog(null, "Consulta atualizada com sucesso!");
     }
 
     // Cancelar uma consulta
@@ -80,7 +80,7 @@ public class ServicoConsulta {
         }
 
         consultas.remove(consulta);
-        System.out.println("Consulta removida com sucesso!");
+        JOptionPane.showMessageDialog(null, "Consulta removida com sucesso!");
     }
 
     // Buscar uma consulta específica

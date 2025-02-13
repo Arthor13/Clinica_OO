@@ -69,4 +69,8 @@ public class Exame {
     this.dataRealizacao = dataRealizacao;
     this.resultado = resultado;
     }
+
+    public String toString() {
+        return "ID: " + this.id + " - Tipo: " + this.tipo + " - Data de Prescrição: " + this.dataPrescricao + " - Data de Realização: " + this.dataRealizacao + " - Resultado: " + this.resultado + " - Custo: " + this.custo;
+    }
 }
