@@ -16,7 +16,7 @@ public class MenuMedico {
     public static void menuMedico() {
         int opcao = 0;
         do {
-            opcao = Integer.parseInt(JOptionPane.showInputDialog("Menu Medico\n1 - Cadastrar\n2 - Listar\n3 - Atualizar\n4 - Excluir\n5 - Voltar"));
+            opcao = Integer.parseInt(JOptionPane.showInputDialog("Menu Medico\n1 - Cadastrar\n2 - Listar\n3 - Atualizar\n4 - Excluir\n5- Exames\n6 - Voltar"));
             switch (opcao) {
                 case 1:
                     // Cadastrar
@@ -35,6 +35,10 @@ public class MenuMedico {
                     excluirMedico();
                     break; // Adicione o break aqui
                 case 5:
+                    // Exames
+                    MenuExame.menuExame();
+                    break; // Adicione o break aqui
+                case 6:
                     // Voltar
                     break;
                 default:
