@@ -5,11 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import entidades.Medicamento;
-import entidades.StatusConsulta;
-import entidades.Exame;
-import entidades.Medico;
-import entidades.Paciente;
 
 public class Consulta {
   private LocalDate dataConsulta;
@@ -25,7 +20,7 @@ public class Consulta {
   public Consulta(String dataConsulta, String horarioInicio, int duracao, String status,
                   entidades.Paciente paciente, entidades.Medico medico, List<entidades.Exame> examesPrescritos,
                   List<entidades.Medicamento> medicamentosPrescritos, double valor) {
-    this.dataConsulta = LocalDate.parse(dataConsulta, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    this.dataConsulta = LocalDate.parse(dataConsulta, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     this.horarioInicio = LocalTime.parse(horarioInicio, DateTimeFormatter.ofPattern("HH:mm"));
     this.duracao = duracao;
     this.status = StatusConsulta.valueOf(status.toUpperCase());
