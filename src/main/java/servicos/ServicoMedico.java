@@ -4,6 +4,7 @@ import entidades.Medico;
 import excecoes.MedicoJaExisteException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class ServicoMedico {
@@ -19,11 +20,13 @@ public class ServicoMedico {
         }
 
         medicos.add(medico);
-        System.out.println("Médico cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Médico cadastrado com sucesso!");
     }
 
-    public List<Medico> listarMedicos() {
-        return medicos;
+    public void listarMedicos() {
+        for (Medico m : medicos) {
+            JOptionPane.showMessageDialog(null, m);
+        }
     }
 
     public Medico buscarMedicoPorCrm(int crm) {
@@ -41,13 +44,13 @@ public class ServicoMedico {
         medicoAtualizado.setNome(medico.getNome());
         medicoAtualizado.setDataNascimento(medico.getDataNascimento());
         medicoAtualizado.setEspecialidade(medico.getEspecialidade());
-        System.out.println("Médico atualizado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Médico atualizado com sucesso!");
     }
 
     public void removerMedico(int crm) {
         Medico medicoRemovido = buscarMedicoPorCrm(crm);
 
         medicos.remove(medicoRemovido);
-        System.out.println("Médico removido com sucesso!");
+        JOptionPane.showMessageDialog(null, "Médico removido com sucesso!");
     }
 }

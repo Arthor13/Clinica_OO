@@ -1,11 +1,13 @@
 package menu;
 
-import javax.swing.JOptionPane;
 import entidades.Paciente;
-import java.time.LocalDate;
-import servicos.ServicoPaciente;
 import excecoes.PacienteJaExisteException;
-import excecoes.PacienteNaoExisteException;
+import excecoes.PacienteNaoEncontradoException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import javax.swing.JOptionPane;
+import servicos.ServicoPaciente;
 public class MenuPaciente {
     static ServicoPaciente servicoPaciente = new ServicoPaciente();
     public static void menuPaciente() {
@@ -16,15 +18,19 @@ public class MenuPaciente {
                 case 1:
                     // Cadastrar
                     cadastrarPaciente();
+                    break;
                 case 2:
                     // Listar
                     listarPacientes();
+                    break;
                 case 3:
                     // Atualizar
                     atualizarPaciente();
+                    break;
                 case 4:
                     // Excluir
                     excluirPaciente();
+                    break;
                 case 5:
                     // Voltar
                     break;
@@ -40,7 +46,17 @@ public class MenuPaciente {
         String cpf = JOptionPane.showInputDialog("CPF");
         String telefone = JOptionPane.showInputDialog("Telefone");
         String email = JOptionPane.showInputDialog("Email");
-        LocalDate dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+
+        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento (dd/MM/yyyy)");
+        LocalDate dataNascimento = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Nascimento inválida");
+            return;
+        }
+
         Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
         try {
             servicoPaciente.cadastrarPaciente(paciente);
@@ -58,11 +74,21 @@ public class MenuPaciente {
         String nome = JOptionPane.showInputDialog("Nome");
         String telefone = JOptionPane.showInputDialog("Telefone");
         String email = JOptionPane.showInputDialog("Email");
-        LocalDate dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+
+        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento (dd/MM/yyyy)");
+        LocalDate dataNascimento = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Nascimento inválida");
+            return;
+        }
+
         Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
         try {
             servicoPaciente.atualizarPaciente(cpf, paciente);
-        } catch (PacienteNaoExisteException e) {
+        } catch (PacienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
@@ -71,7 +97,8 @@ public class MenuPaciente {
         String cpf = JOptionPane.showInputDialog("CPF");
         try {
             servicoPaciente.removerPaciente(cpf);
-        } catch (PacienteNaoExisteException e) {
+        } catch (PacienteNaoEncontradoException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+}
