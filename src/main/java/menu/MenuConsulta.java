@@ -17,20 +17,24 @@ public class MenuConsulta {
     public static void menuConsulta() {
         int opcao = 0;
         do {
-            opcao = Integer.parseInt(JOptionPane.showInputDialog("Menu Consulta\n1 - Agendar\n2 - Listar\n3 - Atualizar\n4 - Excluir\n5 - Voltar"));
+            opcao = Integer.parseInt(JOptionPane.showInputDialog("Menu Consulta\n1 - Agendar\n2 - Listar\n3 - Atualizar\n4 - Cancelar\n5 - Voltar"));
             switch (opcao) {
                 case 1:
                     // Agendar
                     agendarConsulta();
+                    break;
                 case 2:
                     // Listar
                     listarConsultas();
+                    break;
                 case 3:
                     // Atualizar
                     atualizarConsulta();
+                    break;
                 case 4:
                     // Excluir
-                    excluirConsulta();
+                    cancelarConsulta();
+                    break;
                 case 5:
                     // Voltar
                     break;
@@ -63,6 +67,7 @@ public class MenuConsulta {
         double valor = Double.parseDouble(stringValor);
 
         Consulta consulta = new Consulta(dataConsulta, horarioInicio, duracao, status, servicoPaciente.buscarPacientePorCpf(cpfpaciente), servicoMedico.buscarMedicoPorCrm(crmMedico), examesPrescritos, medicamentosPrescritos, valor);
+
         try {
             servicoConsulta.agendarConsulta(consulta);
         } catch (ConsultaJaExisteException e) {

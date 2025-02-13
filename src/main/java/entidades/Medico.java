@@ -28,4 +28,8 @@ public class Medico extends Pessoa {
     public void setEspecialidade(String especialidade) {
         this.especialidade = especialidade;
     }
+
+    public String toString() {
+        return "Nome: " + getNome() + "\nCPF: " + getCpf() + "\nData de Nascimento: " + getDataNascimento() + "\nCRM: " + crm + "\nEspecialidade: " + especialidade;
+    }
 }

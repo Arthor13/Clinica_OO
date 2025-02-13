@@ -1,4 +1,4 @@
-package model.excecoes;
+package excecoes;
 
 public class ConsultaJaExisteException extends RuntimeException {
     public ConsultaJaExisteException(String message) {

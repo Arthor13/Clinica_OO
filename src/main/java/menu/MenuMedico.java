@@ -3,13 +3,17 @@ package menu;
 import javax.swing.JOptionPane;
 import entidades.Medico;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import servicos.ServicoMedico;
 import excecoes.MedicoJaExisteException;
 import java.lang.classfile.Signature;
 import java.lang.classfile.instruction.ThrowInstruction;
+
 public class MenuMedico {
     static ServicoMedico servicoMedico = new ServicoMedico();
-    public static void menuPaciente() {
+    public static void menuMedico() {
        
         int opcao = 0;
         do {
@@ -18,15 +22,19 @@ public class MenuMedico {
                 case 1:
                     // Cadastrar
                     cadastrarMedico();
+                    break; // Adicione o break aqui
                 case 2:
                     // Listar
-                   listarMedico();
+                    listarMedico();
+                    break; // Adicione o break aqui
                 case 3:
                     // Atualizar
                     atualizarMedico();
+                    break; // Adicione o break aqui
                 case 4:
                     // Excluir
                     excluirMedico();
+                    break; // Adicione o break aqui
                 case 5:
                     // Voltar
                     break;
@@ -36,11 +44,20 @@ public class MenuMedico {
         } while (opcao != 5);
     }
 
-
-   public static void cadastrarMedico(){
+    public static void cadastrarMedico(){
         String nome = JOptionPane.showInputDialog("Nome");
         String cpf = JOptionPane.showInputDialog("CPF");
-        String dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento (dd/MM/yyyy)");
+
+        LocalDate dataNascimento = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Nascimento inválida");
+            return;
+        }
+        
         int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
         String especialidade = JOptionPane.showInputDialog("Especialidade");
         Medico medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
@@ -59,7 +76,18 @@ public class MenuMedico {
         int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
         String nome = JOptionPane.showInputDialog("Nome");
         String cpf = JOptionPane.showInputDialog("CPF");
-        LocalDate dataNascimento = JOptionPane.showInputDialog("Data de Nascimento");
+        
+        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento");
+
+        LocalDate dataNascimento = null;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            dataNascimento = LocalDate.parse(dataNascimentoStr, formatter);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Data de Nascimento inválida");
+            return;
+        }
+
         String especialidade = JOptionPane.showInputDialog("Especialidade");
         Medico medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
         servicoMedico.atualizarMedico(crm, medico);
@@ -69,3 +97,4 @@ public class MenuMedico {
         int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
         servicoMedico.removerMedico(crm);
     }
+}
