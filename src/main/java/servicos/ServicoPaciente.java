@@ -5,6 +5,7 @@ import excecoes.PacienteJaExisteException;
 import excecoes.PacienteNaoEncontradoException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ServicoPaciente {
     private List<Paciente> pacientes;
@@ -19,11 +20,13 @@ public class ServicoPaciente {
         }
 
         pacientes.add(paciente);
-        System.out.println("Paciente cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Paciente cadastrado com sucesso!");
     }
 
-    public List<Paciente> listarPacientes() {
-        return pacientes;
+    public void listarPacientes() {
+        for (Paciente p : pacientes) {
+            JOptionPane.showMessageDialog(null, p);
+        }
     }
 
     public Paciente buscarPacientePorCpf(String cpf) {
@@ -45,7 +48,7 @@ public class ServicoPaciente {
         pacienteAtualizado.setDataNascimento(paciente.getDataNascimento());
         pacienteAtualizado.setTelefone(paciente.getTelefone());
         pacienteAtualizado.setEmail(paciente.getEmail());
-        System.out.println("Paciente atualizado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Paciente atualizado com sucesso!");
     }
 
     public void removerPaciente(String cpf) throws PacienteNaoEncontradoException {
@@ -55,6 +58,6 @@ public class ServicoPaciente {
         }
 
         pacientes.remove(pacienteRemovido);
-        System.out.println("Paciente removido com sucesso!");
+        JOptionPane.showMessageDialog(null, "Paciente removido com sucesso!");
     }
 }

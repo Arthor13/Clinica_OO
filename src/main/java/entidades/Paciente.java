@@ -53,4 +53,8 @@ public class Paciente extends entidades.Pessoa {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    public String toString() {
+        return "Nome: " + getNome() + "\nCPF: " + getCpf() + "\nData de Nascimento: " + getDataNascimento() + "\nTelefone: " + telefone + "\nEmail: " + email;
+    }
 }
