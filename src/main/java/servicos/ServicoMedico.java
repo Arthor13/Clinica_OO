@@ -15,7 +15,7 @@ public class ServicoMedico {
     }
 
     public void cadastrarMedico(Medico medico) throws MedicoJaExisteException {
-        if (buscarMedicoPorCrm(medico.getCrm()) != null) {
+        if (buscarMedicoPorCpf(medico.getCpf()) != null) {
             throw new MedicoJaExisteException("Já existe um médico com esse CPF: " + medico.getCpf());
         }
 
@@ -32,6 +32,14 @@ public class ServicoMedico {
     public Medico buscarMedicoPorCrm(int crm) {
         for (Medico m : medicos) {
             if (m.getCrm() == crm) {
+                return m;
+            }
+        }
+        return null;
+    }
+    public Medico buscarMedicoPorCpf(String cpf) {
+        for (Medico m : medicos) {
+            if (m.getCpf().equals(cpf)) {
                 return m;
             }
         }

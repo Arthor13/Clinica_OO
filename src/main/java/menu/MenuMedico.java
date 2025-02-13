@@ -1,20 +1,19 @@
 package menu;
 
-import javax.swing.JOptionPane;
 import entidades.Medico;
+import excecoes.CpfInvalidoException;
+import excecoes.CrmInvalidoException;
+import excecoes.MedicoJaExisteException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
+import javax.swing.JOptionPane;
 import servicos.ServicoMedico;
-import excecoes.MedicoJaExisteException;
-import java.lang.classfile.Signature;
-import java.lang.classfile.instruction.ThrowInstruction;
 
 public class MenuMedico {
     static ServicoMedico servicoMedico = new ServicoMedico();
+
     public static void menuMedico() {
-       
         int opcao = 0;
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog("Menu Medico\n1 - Cadastrar\n2 - Listar\n3 - Atualizar\n4 - Excluir\n5 - Voltar"));
@@ -44,9 +43,9 @@ public class MenuMedico {
         } while (opcao != 5);
     }
 
-    public static void cadastrarMedico(){
+    public static void cadastrarMedico() {
         String nome = JOptionPane.showInputDialog("Nome");
-        String cpf = JOptionPane.showInputDialog("CPF");
+        String cpf = JOptionPane.showInputDialog("CPF (Deve conter 11 dígitos)");
         String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento (dd/MM/yyyy)");
 
         LocalDate dataNascimento = null;
@@ -58,9 +57,15 @@ public class MenuMedico {
             return;
         }
         
-        int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
+        int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM (Deve conter 4 dígitos)"));
         String especialidade = JOptionPane.showInputDialog("Especialidade");
-        Medico medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
+        Medico medico;
+        try {
+            medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
+        } catch (CrmInvalidoException | CpfInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         try {
             servicoMedico.cadastrarMedico(medico);
         } catch (MedicoJaExisteException e) {
@@ -68,16 +73,16 @@ public class MenuMedico {
         }
     }
 
-    public static void listarMedico(){
+    public static void listarMedico() {
         servicoMedico.listarMedicos();
     }
 
-    public static void atualizarMedico(){
+    public static void atualizarMedico() {
         int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
         String nome = JOptionPane.showInputDialog("Nome");
-        String cpf = JOptionPane.showInputDialog("CPF");
+        String cpf = JOptionPane.showInputDialog("CPF (Deve conter 11 dígitos)");
         
-        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento");
+        String dataNascimentoStr = JOptionPane.showInputDialog("Data de Nascimento (dd/MM/yyyy)");
 
         LocalDate dataNascimento = null;
         try {
@@ -89,11 +94,16 @@ public class MenuMedico {
         }
 
         String especialidade = JOptionPane.showInputDialog("Especialidade");
-        Medico medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
-        servicoMedico.atualizarMedico(crm, medico);
+        Medico medico;
+        try {
+            medico = new Medico(nome, cpf, dataNascimento, crm, especialidade);
+            servicoMedico.atualizarMedico(crm, medico);
+        } catch (CrmInvalidoException | CpfInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 
-    public static void excluirMedico(){
+    public static void excluirMedico() {
         int crm = Integer.parseInt(JOptionPane.showInputDialog("CRM"));
         servicoMedico.removerMedico(crm);
     }

@@ -1,8 +1,10 @@
 package servicos;
 
 import  entidades.Exame;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 public class ServicoExame {
 
@@ -12,9 +14,10 @@ public class ServicoExame {
         this.exames = new ArrayList<>();
     }
 
-    public void cadastrarExame(Exame exame) {
+    public void cadastrarExame(String tipo, LocalDate dataPrescricao, Double custo  ) {
+        Exame exame = new Exame(tipo, dataPrescricao, custo);
         exames.add(exame);
-        System.out.println("Exame cadastrado com sucesso!");
+        JOptionPane.showMessageDialog(null, "Exame cadastrado com sucesso!");
     }
 
     public List<Exame> listarExames() {
@@ -37,7 +40,7 @@ public class ServicoExame {
             exameAtualizado.setTipo(exame.getTipo());
             exameAtualizado.setCusto(exame.getCusto());
             exameAtualizado.setDataPrescricao(exame.getDataPrescricao());
-            System.out.println("Exame atualizado com sucesso!");
+            JOptionPane.showMessageDialog(null, "Exame atualizado com sucesso!");
         } 
     }
 
@@ -45,7 +48,7 @@ public class ServicoExame {
         Exame exame = buscarExameporId(id);
         if (exame != null) {
             exames.remove(exame);
-            System.out.println("Exame removido com sucesso!");
+            JOptionPane.showMessageDialog(null, "Exame removido com sucesso!");
         } 
     }
 }

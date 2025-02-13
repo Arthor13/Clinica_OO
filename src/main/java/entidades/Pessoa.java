@@ -1,6 +1,8 @@
 package entidades;
 
+import excecoes.CpfInvalidoException;
 import java.time.LocalDate;
+
 
 public class Pessoa {
 
@@ -10,9 +12,9 @@ public class Pessoa {
     private HistoricoMedico historicoMedico;
 
     // Construtor
-    public Pessoa(String nome, String cpf, LocalDate dataNascimento) {
+    public Pessoa(String nome, String cpf, LocalDate dataNascimento) throws CpfInvalidoException {
         this.nome = nome;
-        this.cpf = cpf;
+        setCpf(cpf); // Verificação do CPF
         this.dataNascimento = dataNascimento;
         this.historicoMedico = new HistoricoMedico();
     }
@@ -31,7 +33,10 @@ public class Pessoa {
         return cpf;
     }
 
-    public void setCpf(String cpf) {
+    public void setCpf(String cpf) throws CpfInvalidoException {
+        if (cpf == null || cpf.length() != 11 || !cpf.matches("\\d+")) {
+            throw new CpfInvalidoException("CPF inválido. Deve conter exatamente 11 dígitos.");
+        }
         this.cpf = cpf;
     }
 

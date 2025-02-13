@@ -12,7 +12,7 @@ public class Exame {
     private Double custo;
 
 
-    public Exame(String tipo,LocalDate dataPrescricao,Double custo) {
+    public Exame(String tipo,LocalDate dataPrescricao, Double custo) {
         this.id = contadorID++;
         this.tipo = tipo;
         this.dataPrescricao = dataPrescricao;

@@ -1,3 +1,4 @@
+package menu;
 import menu.MenuPaciente;
 
 public class MenuPacienteTest {

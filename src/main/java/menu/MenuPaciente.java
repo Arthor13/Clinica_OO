@@ -2,12 +2,14 @@ package menu;
 
 import entidades.Paciente;
 import excecoes.PacienteJaExisteException;
+import excecoes.CpfInvalidoException;
 import excecoes.PacienteNaoEncontradoException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import javax.swing.JOptionPane;
 import servicos.ServicoPaciente;
+
 public class MenuPaciente {
     static ServicoPaciente servicoPaciente = new ServicoPaciente();
     public static void menuPaciente() {
@@ -41,7 +43,7 @@ public class MenuPaciente {
     }
 
 
-    public static void cadastrarPaciente() {
+    public static void cadastrarPaciente(){
         String nome = JOptionPane.showInputDialog("Nome");
         String cpf = JOptionPane.showInputDialog("CPF");
         String telefone = JOptionPane.showInputDialog("Telefone");
@@ -57,19 +59,24 @@ public class MenuPaciente {
             return;
         }
 
-        Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
+        Paciente paciente = null;
+        try {
+            paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
+        } catch (CpfInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         try {
             servicoPaciente.cadastrarPaciente(paciente);
         } catch (PacienteJaExisteException e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
-}
+    }
 
     public static void listarPacientes(){
         servicoPaciente.listarPacientes();
     }
-
-    public static void atualizarPaciente(){
+    public static void atualizarPaciente() {
         String cpf = JOptionPane.showInputDialog("CPF");
         String nome = JOptionPane.showInputDialog("Nome");
         String telefone = JOptionPane.showInputDialog("Telefone");
@@ -85,7 +92,13 @@ public class MenuPaciente {
             return;
         }
 
-        Paciente paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
+        Paciente paciente = null;
+        try {
+            paciente = new Paciente(nome, cpf, dataNascimento, telefone, email);
+        } catch (CpfInvalidoException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            return;
+        }
         try {
             servicoPaciente.atualizarPaciente(cpf, paciente);
         } catch (PacienteNaoEncontradoException e) {

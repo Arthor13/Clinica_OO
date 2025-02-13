@@ -1,5 +1,6 @@
 package entidades;
 
+import excecoes.CpfInvalidoException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,7 @@ public class Paciente extends entidades.Pessoa {
     private List<String> historicoExames;
     private boolean pagamentoPendente;
 
-    public Paciente(String nome, String cpf, LocalDate dataNascimento, String telefone, String email) {
+    public Paciente(String nome, String cpf, LocalDate dataNascimento, String telefone, String email) throws CpfInvalidoException {
         super(nome, cpf, dataNascimento);
         this.historicoExames = new ArrayList<>();
         this.pagamentoPendente = false;

@@ -1,5 +1,7 @@
 package entidades;
 
+import excecoes.CpfInvalidoException;
+import excecoes.CrmInvalidoException;
 import java.time.LocalDate;
 
 public class Medico extends Pessoa {
@@ -7,9 +9,9 @@ public class Medico extends Pessoa {
     private int crm;
     private String especialidade;
 
-    public Medico(String nome, String cpf, LocalDate dataNascimento, int crm, String especialidade) {
+    public Medico(String nome, String cpf, LocalDate dataNascimento, int crm, String especialidade) throws CrmInvalidoException, CpfInvalidoException {
         super(nome, cpf, dataNascimento);
-        this.crm = crm;
+        setCrm(crm); // Verificação do CRM
         this.especialidade = especialidade;
     }
 
@@ -17,7 +19,10 @@ public class Medico extends Pessoa {
         return crm;
     }
 
-    public void setCrm(int crm) {
+    public void setCrm(int crm) throws CrmInvalidoException {
+        if (String.valueOf(crm).length() != 4) {
+            throw new CrmInvalidoException("CRM inválido. Deve conter exatamente 4 dígitos.");
+        }
         this.crm = crm;
     }
 
