@@ -1,5 +1,5 @@
 
-public class ServicoPrescricao {
+/*public class ServicoPrescricao {
     private List<Prescricao> prescricoes = new ArrayList<>();
     
     // Create
@@ -29,4 +29,4 @@ public class ServicoPrescricao {
             System.out.println("Prescrição não encontrada.");
         }
     }
-}
+}*/
