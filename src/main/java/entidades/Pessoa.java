@@ -53,4 +53,7 @@ public class Pessoa {
     public HistoricoMedico getHistoricoMedico() {
         return historicoMedico;
     }
+    public void setHistoricoMedico(HistoricoMedico historicoMedico) {
+        this.historicoMedico = historicoMedico;
+    }
 }
