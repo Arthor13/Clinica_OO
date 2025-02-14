@@ -44,8 +44,7 @@ public class ServicoExame {
         } 
     }
 
-    public void removerExame(int id) {
-        Exame exame = buscarExameporId(id);
+    public void removerExame(Exame exame) {
         if (exame != null) {
             exames.remove(exame);
             JOptionPane.showMessageDialog(null, "Exame removido com sucesso!");

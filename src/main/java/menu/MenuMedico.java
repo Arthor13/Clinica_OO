@@ -44,7 +44,7 @@ public class MenuMedico {
                 default:
                     JOptionPane.showMessageDialog(null, "Opção inválida");
             }
-        } while (opcao != 5);
+        } while (opcao != 6);
     }
 
     public static void cadastrarMedico() {

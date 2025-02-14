@@ -70,6 +70,9 @@ public class MenuConsulta {
             JOptionPane.showMessageDialog(null, e.getMessage());
             return;
         }
+
+        
+
     }
 
     public static void listarConsultas(){
