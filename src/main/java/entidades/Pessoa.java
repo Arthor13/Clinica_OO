@@ -9,7 +9,7 @@ public class Pessoa {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
-    private HistoricoMedico historicoMedico;
+    protected HistoricoMedico historicoMedico;
 
     // Construtor
     public Pessoa(String nome, String cpf, LocalDate dataNascimento) throws CpfInvalidoException {

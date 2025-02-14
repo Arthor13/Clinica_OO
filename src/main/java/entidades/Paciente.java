@@ -2,43 +2,31 @@ package entidades;
 
 import excecoes.CpfInvalidoException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Paciente extends entidades.Pessoa {
 
     private String telefone;
     private String email;
 
-    private List<String> historicoExames;
     private boolean pagamentoPendente;
 
     public Paciente(String nome, String cpf, LocalDate dataNascimento, String telefone, String email) throws CpfInvalidoException {
         super(nome, cpf, dataNascimento);
-        this.historicoExames = new ArrayList<>();
         this.pagamentoPendente = false;
         this.telefone = telefone;
         this.email = email;
     }
 
-    public List<String> getHistoricoExames() {
-        return historicoExames;
+    public void adicionarExame(Exame exame) {
+        historicoMedico.adicionarExame(exame);
     }
 
-    public void adicionarExame(String exame) {
-        historicoExames.add(exame);
-    }
-
-    public boolean isPagamentoPendente() {
+    public boolean getPagamentoPendente() {
         return pagamentoPendente;
     }
 
-    public void bloquearCadastro() {
-        this.pagamentoPendente = true;
-    }
-
-    public void realizarPagamento() {
-        this.pagamentoPendente = false;
+    public void setPagamentoPendente(boolean pagamentoPendente) {
+        this.pagamentoPendente = pagamentoPendente;
     }
 
     public String getTelefone() {
