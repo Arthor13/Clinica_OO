@@ -1,10 +1,10 @@
 package menu;
 
-import java.util.List;
-import javax.swing.JOptionPane;
-import entidades.Exame;;
+import entidades.Exame;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import javax.swing.JOptionPane;
 import servicos.ServicoExame;
 
 public class MenuExame {
@@ -53,7 +53,7 @@ public class MenuExame {
             JOptionPane.showMessageDialog(null, "Data inválida");
             return;
         }
-        Exame exame = new Exame(tipo, dataPrescricao, custo);
+        servicoExame.cadastrarExame(tipo, dataPrescricao, custo);
     }
 
     public static void listarExames() {

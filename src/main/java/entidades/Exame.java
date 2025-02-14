@@ -9,10 +9,10 @@ public class Exame {
     private LocalDate dataPrescricao;
     private LocalDate dataRealizacao;
     private String resultado;
-    private Double custo;
+    private double custo;
 
 
-    public Exame(String tipo,LocalDate dataPrescricao, Double custo) {
+    public Exame(String tipo,LocalDate dataPrescricao, double custo) {
         this.id = contadorID++;
         this.tipo = tipo;
         this.dataPrescricao = dataPrescricao;
@@ -57,7 +57,7 @@ public class Exame {
         this.resultado = resultado;
     }
 
-    public Double getCusto() {
+    public double getCusto() {
         return custo;
     }
 
