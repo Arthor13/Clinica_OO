@@ -1,10 +1,11 @@
 package main;
 
 import javax.swing.JOptionPane;
-import  menu.MenuMedico;
+import menu.MenuConsulta;
+import menu.MenuMedico;
 import  menu.MenuPaciente;
 
-public class MenuPrincipal {
+public class Principal {
     public static void main(String[] args) {
         int opcao = 0;
         do {
@@ -17,7 +18,7 @@ public class MenuPrincipal {
                     MenuPaciente.menuPaciente();
                     break;
                 case 3:
-                    ///MenuConsulta.menuConsulta();
+                    MenuConsulta.menuConsulta();
                     break;
                 case 4:
                     break;
